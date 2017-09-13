@@ -11,7 +11,8 @@
     "dev:server": "cd server && npm start",
     "install": "run-s install:server",
     "install:server": "cd server && npm install",
-    "install:client": "cd client && npm install"
+    "install:client": "cd client && npm install",
+    "test": "mocha ./test"
   },
   "cacheDirectories": [
     "node_modules",
@@ -21,9 +22,12 @@
   "author": "Joe Turner <jturner@thinkful.com>",
   "license": "MIT",
   "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "cross-env": "^3.1.4",
     "express": "^4.14.1",
     "http-proxy-middleware": "^0.17.3",
+    "mocha": "^3.5.3",
     "npm-run-all": "^4.0.1",
     "xp": "^1.0.1"
   }
