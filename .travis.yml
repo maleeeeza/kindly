@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: rRsHlbPX41HtYPVs9p2zlQyFZ2nWW5v1bDeLzPsadf5v2xENpRrhfozOiae68Idh9gR2rCgp7DcTYvhkP/V1F8RInifRbe+1CaerQT847OBcQQ7zy5k3fXBfe+UIsLA1x70Mj8iwOQHUOzStqC5O6wbSQT1SETod41r/D2GF9ObPoJNm2Wij1xKKsZBECGfm4PDJU+mvLs5bYnZNsHC3EdhssEvBBzxDi+ubHdtnQQXovQ4ZjR3ndFVubACKBeyrJN9YeuVW4CS4g2nWLsgOENMsQysefALDW3esAgOpKpJXhThyRIXURl5RrakyD/jcqX3o8onRgd8pRA1jO2aIaKBzm6H3uw2RSmjMzmiI7s7J2J3OLjP8/eI1uXnz6yP9YaJ+mBaUTooIHP0LKRVwoGWnKh/smPHVFvKoysoRqiPW4lK6CY8nalrkqkBrgM+FSc2Nrge6ddYj8Nj7qJlsFXlHiCtdza0kxbaZdwsEo83xNxrzFxBuMvvCk9qhYaQY3+BFnNLXRiJW/ahG6mpOjhX+lfFW9XgCc2DrExq+LNlSKR/UcdTaA/fXhyIwZgr3RBYVPTrNBzvqSX5j54V9+xzyPZCF/3D1in+/deG5YsLtk3+Gh+/C9ocbwf4U+HesmceUR9qsNrrz+PdN27aMd1uoFWFnIrL6xN6nnlTPfas=
+  app: be-kindly
+  on:
+    repo: maleeeeza/kindly
