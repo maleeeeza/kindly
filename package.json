@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm run build",
-    "dev": "run-p dev:server start",
+    "dev": "run-p dev:server start & run-p sass:build",
+    "sass:build":"sass --watch ./client/public/styles/sass/main.scss:./client/public/styles/css/main.css",
     "dev:client": "cd client && cross-env BROWSER=none npm start -- --color=always | xp http://localhost:3000/ http://localhost:8080/",
     "dev:server": "cd server && npm start",
     "install": "run-s install:server",
