@@ -1,11 +1,17 @@
-const mongoose, {Schema} = require("mongoose");
+// const mongoose, {Schema} = require("mongoose");
 
-const KindlySchema = new Schema({
+const mongoose = require('mongoose');
+
+const KindlySchema = mongoose.Schema({
   lat: Number,
   long: Number,
   description: String,
-  createdDate: Date
-});
+  createdDate: { type: Date, default: Date.now }
+},
+  {
+   collection: 'kindlys'
+  }
+);
 
 
 const Kindly = mongoose.model("Kindly", KindlySchema);

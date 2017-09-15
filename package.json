@@ -4,7 +4,7 @@
   "description": "A full-stack starter template",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js & node server/index.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm run build",
     "dev": "run-p dev:server start & run-p sass:build",
     "sass:build": "sass --watch ./client/public/styles/sass/main.scss:./client/public/styles/css/main.css",
@@ -23,13 +23,14 @@
   "author": "Joe Turner <jturner@thinkful.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.1",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "cross-env": "^3.1.4",
     "express": "^4.14.1",
     "http-proxy-middleware": "^0.17.3",
     "mocha": "^3.5.3",
-    "mongoose": "^4.11.11",
+    "mongoose": "^4.10.8",
     "npm-run-all": "^4.0.1",
     "xp": "^1.0.1"
   }
