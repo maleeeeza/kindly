@@ -10,6 +10,7 @@
     "sass:build": "sass --watch ./client/public/styles/sass/main.scss:./client/public/styles/css/main.css",
     "dev:client": "cd client && cross-env BROWSER=none npm start -- --color=always | xp http://localhost:3000/ http://localhost:8080/",
     "dev:server": "cd server && npm start",
+    "production": "NODE_ENV=production node index.js",
     "install": "run-s install:server",
     "install:server": "cd server && npm install",
     "install:client": "cd client && npm install",
