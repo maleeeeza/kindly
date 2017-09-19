@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
-const {DATABASE_URL} = require('./config');
+const {DATABASE_URL, MONGOLAB_URL} = require('./config');
 const {router} = require('./kindly/router');
 
 mongoose.Promise = global.Promise;
@@ -27,7 +27,8 @@ app.get('*', (req, res) => {
 let server;
 function runServer(port=3001) {
     return new Promise((resolve, reject) => {
-      mongoose.connect(DATABASE_URL, function(err) {
+      const databaseURL = process.env.NODE_ENV === 'production' ? MONGOLAB_URL : DATABASE_URL;
+      mongoose.connect(databaseURL, function(err) {
         if (err) {
           return reject(err);
         }
