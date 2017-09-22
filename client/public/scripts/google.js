@@ -39,6 +39,7 @@ function geolocate() {
 
   }
 }
+
 $(function(){
 
   const geolocButton = $('#current-location');
