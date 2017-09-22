@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/styles/css/main.css" />
-  <script type="text/javascript" src="/scripts/google.js"></script>
   <title>Document</title>
 </head>
 <body>
@@ -25,14 +24,22 @@
     </div> -->
 
     <form>
-      <input id="autocomplete" placeholder="Enter your address"
-         onFocus="geolocate()" type="text"></input>
-      <input type="text" />
+      <button type="button" id="current-location">Current location</button>
+      <button type="button" id="address">Enter Address</button>
+      <input id="autocomplete" placeholder="Enter your address" type="text" hidden />
+      <input id="kindly" placeholder="Enter act of kindness" type="text"/>
       <button>Test Post to DB</buton>
     </form>
 
   </main>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO3ak9ZUiaSK4JOH6ID3TyQYhUQQCVmeI&libraries=places&callback=initAutocomplete"
         async defer></script>
+
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="/scripts/google.js"></script>
+
 </body>
 </html>

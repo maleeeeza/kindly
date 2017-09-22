@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 
 // Create a new kindly
 router.post("/", (req, res) => {
-  const requiredFields = ['lat', 'long', 'description'];
+  const requiredFields = ['lat', 'long', 'kindly'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -38,7 +38,7 @@ router.post("/", (req, res) => {
     .create({
       lat: req.body.lat,
       long: req.body.long,
-      description: req.body.description})
+      kindly: req.body.kindly})
     .then(
       kindly => {
         res.status(201).json({message: 'Kindly Created'})

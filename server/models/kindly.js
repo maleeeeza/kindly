@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const KindlySchema = mongoose.Schema({
   lat: Number,
   long: Number,
-  description: String,
+  kindly: String,
   createdDate: { type: Date, default: Date.now }
 },
   {
