@@ -1,6 +1,7 @@
 var placeSearch, autocomplete;
 var state = {
-  loc: null
+  lat: null,
+  long: null
 };
 
 function initAutocomplete() {
@@ -17,14 +18,15 @@ function initAutocomplete() {
 // Bias the autocomplete object to the user's geographical location,
 // as supplied by the browser's 'navigator.geolocation' object.
 function geolocate() {
-  console.log('howdy');
   if (navigator.geolocation) {
-    console.log('after if');
     navigator.geolocation.getCurrentPosition(function(position) {
       var geolocation = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
-      };
+      }
+      state.lat = geolocation.lat;
+      state.long = geolocation.lng;
+
 
       var circle = new google.maps.Circle({
         center: geolocation,
@@ -32,25 +34,12 @@ function geolocate() {
       });
       console.log("geolocation:" + geolocation.lat + "  " + geolocation.lng);
       console.log("circle:" + circle.center + circle.radius);
+      console.log("state: " + JSON.stringify(state));
 
       autocomplete.setBounds(circle.getBounds());
 
     });
 
+
   }
 }
-
-$(function(){
-
-  const geolocButton = $('#current-location');
-  const addressButton = $('#address');
-
-  geolocButton.on('click', geolocate);
-  addressButton.on('click', function(e){
-    $('#autocomplete').removeAttr("hidden");
-  });
-
-
-
-
-});
