@@ -7,8 +7,14 @@ const {DATABASE_URL} = require('./config');
 const {router} = require('./kindly/router');
 
 mongoose.Promise = global.Promise;
-app.use('/api/kindlys', router);
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods: POST');
+  next();
+});
+app.use('/api', router);
 
 
 
@@ -27,7 +33,7 @@ app.get('*', (req, res) => {
 let server;
 function runServer(port=3001) {
     return new Promise((resolve, reject) => {
-      
+
       mongoose.connect(DATABASE_URL, function(err) {
         if (err) {
           return reject(err);

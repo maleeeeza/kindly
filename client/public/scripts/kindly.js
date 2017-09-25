@@ -1,7 +1,8 @@
 var placeSearch, autocomplete;
 var state = {
   lat: null,
-  long: null
+  long: null,
+  kindly: null
 };
 
 function initAutocomplete() {
@@ -43,3 +44,47 @@ function geolocate() {
 
   }
 }
+
+function saveKindly() {
+
+
+  $.ajax({
+        type: "POST",
+        dataType: 'json',
+        // data: {
+        //   lat: state.lat,
+        //   long: state.long,
+        //   kindly: state.kindly
+        // },
+        data: JSON.stringify(state),
+				contentType: 'application/json',
+        url: "http://localhost:8080/api/kindlys",
+        success: function(msg) {
+             console.log('YAY');
+             console.log("state: " + JSON.stringify(state));
+             }
+
+    });
+}
+
+
+
+$(function(){
+
+  const geolocButton = $('#current-location');
+  const addressButton = $('#address');
+  const kindlyPostButton = $('#submit');
+
+  geolocButton.on('click', geolocate);
+  addressButton.on('click', function(e){
+    $('#autocomplete').removeAttr("hidden");
+  });
+  kindlyPostButton.on('click', function(e){
+    state.kindly = $('#kindly').val();
+    console.log("state with kindly: " + JSON.stringify(state));
+    saveKindly();
+  });
+
+
+
+});

@@ -6,8 +6,11 @@ const router = express.Router();
 
 router.use(jsonParser);
 
+
+
+
 // GET all kindlys
-router.get('/', (req, res) => {
+router.get('/kindlys', (req, res) => {
   Kindly
     .find()
     .then(kindlys => {
@@ -23,7 +26,7 @@ router.get('/', (req, res) => {
 });
 
 // Create a new kindly
-router.post("/", (req, res) => {
+router.post("/kindlys", (req, res) => {
   const requiredFields = ['lat', 'long', 'kindly'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
