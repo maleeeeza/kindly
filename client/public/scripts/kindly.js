@@ -58,7 +58,7 @@ function saveKindly() {
         // },
         data: JSON.stringify(state),
 				contentType: 'application/json',
-        url: "http://localhost:8080/api/kindlys",
+        url: "/api/kindlys",
         success: function(msg) {
              console.log('YAY');
              console.log("state: " + JSON.stringify(state));
