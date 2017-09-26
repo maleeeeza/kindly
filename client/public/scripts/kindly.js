@@ -1,4 +1,6 @@
 var placeSearch, autocomplete;
+
+
 var state = {
   lat: null,
   long: null,
@@ -12,8 +14,44 @@ function initAutocomplete() {
       /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
       {types: ['geocode']});
       console.log(autocomplete);
+  autocomplete.addListener('place_changed', function(){
 
+    //get place
+    var place = autocomplete.getPlace();
+    console.log(place);
+
+    GetLatlong();
+
+
+
+
+    //call place.geometry.lat function to find lat
+    //call place.geometry.long function to find long
+    //set lat and long to state.lat/state.long
+
+  });
 }
+
+function GetLatlong(){
+        var geocoder = new google.maps.Geocoder();
+        var address = document.getElementById('autocomplete').value;
+
+        geocoder.geocode({ 'address': address }, function (results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+                var latitude = results[0].geometry.location.lat();
+                var longitude = results[0].geometry.location.lng();
+
+            }
+            console.log(latitude + ' ' + longitude);
+            state.lat = latitude;
+            state.long = longitude;
+            console.log("state: " + JSON.stringify(state));
+        });
+      }
+
+
+
 
 
 // Bias the autocomplete object to the user's geographical location,
@@ -51,11 +89,6 @@ function saveKindly() {
   $.ajax({
         type: "POST",
         dataType: 'json',
-        // data: {
-        //   lat: state.lat,
-        //   long: state.long,
-        //   kindly: state.kindly
-        // },
         data: JSON.stringify(state),
 				contentType: 'application/json',
         url: "/api/kindlys",
@@ -75,6 +108,7 @@ $(function(){
   const addressButton = $('#address');
   const kindlyPostButton = $('#submit');
 
+
   geolocButton.on('click', geolocate);
   addressButton.on('click', function(e){
     $('#autocomplete').removeAttr("hidden");
@@ -84,7 +118,6 @@ $(function(){
     console.log("state with kindly: " + JSON.stringify(state));
     saveKindly();
   });
-
 
 
 });
