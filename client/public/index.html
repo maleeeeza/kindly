@@ -10,35 +10,52 @@
 <body>
   <nav class="navbar">
     <img src="images/kindly.svg" class="logo" alt="Kindly"/>
-    <button>
+    <button id="toggle-kindly-form" class="button-kindly-post " type="button">
       <img src="images/post-kindly.svg" class="post-kindly-icon" alt=""/>
       Post a kindly
     </button>
   </nav>
+  
+
+  <form id="kindly-form" class='hidden'>
+
+    <div>
+      <button type="button" id="current-location" class="form-button">Current location</button>
+
+        <strong>  OR  </strong>
+
+      <button type="button" id="address" class="form-button">Enter Address</button>
+
+    </div>
+    <div>
+      <input id="autocomplete" placeholder="Enter your address" type="text" class="address-field" hidden /> <br />
+      <textarea id="kindly" placeholder="Enter act of kindness" type="text" class="kindly-field" hidden/></textarea>
+      <!-- <input id="kindly" placeholder="Enter act of kindness" type="text" class="kindly-field" hidden/><br /> -->
+      <button id="submit" type="button" class="submit-kindly" hidden>Post Kindly</button>
+    </div>
+
+
+  </form>
 
   <main>
+    <header>
+      <p>
+        The Kindly project is intended to track random acts of kindness in hopes of creating empathetic and compassionate communities worldwide. <br/>
+        Post a kindly or browse kindlys in your area!
+      </p>
+    </header>
     <!-- <div class="hero-image">
       <div class="hero-text">
 
       </div>
     </div> -->
 
-    <form>
-      <button type="button" id="current-location">Current location</button>
-      <button type="button" id="address">Enter Address</button>
-      <input id="autocomplete" placeholder="Enter your address" type="text" hidden />
-      <input id="kindly" placeholder="Enter act of kindness" type="text"/>
-      <button id="submit" type="button">Test Post to DB</buton>
-    </form>
+
+    <div id="map"></div>
 
   </main>
-  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCO3ak9ZUiaSK4JOH6ID3TyQYhUQQCVmeI&libraries=places&callback=initAutocomplete"
-        async defer></script>
-
-  <script src="//code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-
+  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCO3ak9ZUiaSK4JOH6ID3TyQYhUQQCVmeI&libraries=places&callback=initMap" async defer></script>
+  <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/scripts/kindly.js"></script>
 
 </body>

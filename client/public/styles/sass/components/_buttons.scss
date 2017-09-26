@@ -7,3 +7,31 @@
   border: none;
   padding: 0;
 }
+
+.form-button {
+  width: 200px;
+  height: auto;
+  background-color: $secondary-color;
+  font-family: $font-stack;
+  font-weight: bold;
+  vertical-align: middle;
+  border: none;
+  padding: 20px;
+  color: $quaternary-color;
+  border-radius: 10px;
+}
+
+.submit-kindly {
+  width: 60vw;
+  color: $quaternary-color;
+  font: $header-font;
+  background: $tertiary-color;
+  vertical-align: middle;
+  border: 1px solid $tertiary-color;
+  padding: 10px;
+  margin:10px;
+
+  @media only screen and #{$break-small} {
+      width:90vw;
+  }
+}

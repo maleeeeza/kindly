@@ -1,0 +1,13 @@
+header {
+  height:auto;
+  width: 100%;
+  background-color: $tertiary-color;
+  padding: 10px;
+  overflow: hidden;
+  text-align: center;
+}
+
+header p {
+  font: $header-font;
+  color: $quaternary-color;
+}

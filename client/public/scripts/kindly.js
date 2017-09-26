@@ -7,6 +7,134 @@ var state = {
   kindly: null
 };
 
+function initMap() {
+
+  var styledMapType = new google.maps.StyledMapType(
+    [
+        {
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#444444"
+            }
+        ]
+        },
+        {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#f2f2f2"
+            }
+        ]
+        },
+        {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+        },
+        {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 45
+            }
+        ]
+        },
+        {
+        "featureType": "road.highway",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+        },
+        {
+        "featureType": "road.arterial",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+        },
+        {
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+        },
+        {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#46bcec"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+        }
+      ],
+            {name: 'Kindly Map'});
+
+  var kindlyCoords = {lat: 44.975173, lng: -93.274837};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: kindlyCoords,
+    mapTypeControlOptions: {
+            mapTypeIds: ['kindly_map']
+          }
+  });
+  map.mapTypes.set('kindly_map', styledMapType);
+        map.setMapTypeId('kindly_map');
+
+  var image = {
+    url: './images/kindly-marker.svg',
+    scaledSize: new google.maps.Size(50, 50),
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+};
+  var marker = new google.maps.Marker({
+    position: kindlyCoords,
+    map: map,
+    icon:image
+  });
+
+  marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+  var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Minneapolis, MN</h1>'+
+            '<div id="bodyContent">'+
+            '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, orci mattis vestibulum vulputate, augue turpis lobortis leo, ut molestie nibh urna eget elit. Phasellus sed euismod quam. Ut tristique metus massa. Suspendisse mollis et enim vitae blandit. Suspendisse ac lobortis magna. Curabitur nisl dui, dapibus non nunc non, lacinia euismod massa. Duis ut faucibus augue, commodo blandit dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum ut sapien vulputate, vestibulum risus eget, posuere mauris.</p>'+
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+  initAutocomplete();
+}
+
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search to geographical
   // location types.
@@ -21,13 +149,6 @@ function initAutocomplete() {
     console.log(place);
 
     GetLatlong();
-
-
-
-
-    //call place.geometry.lat function to find lat
-    //call place.geometry.long function to find long
-    //set lat and long to state.lat/state.long
 
   });
 }
@@ -49,10 +170,6 @@ function GetLatlong(){
             console.log("state: " + JSON.stringify(state));
         });
       }
-
-
-
-
 
 // Bias the autocomplete object to the user's geographical location,
 // as supplied by the browser's 'navigator.geolocation' object.
@@ -102,6 +219,8 @@ function saveKindly() {
 
 
 
+
+
 $(function(){
 
   const geolocButton = $('#current-location');
@@ -109,10 +228,20 @@ $(function(){
   const kindlyPostButton = $('#submit');
 
 
-  geolocButton.on('click', geolocate);
-  addressButton.on('click', function(e){
-    $('#autocomplete').removeAttr("hidden");
+  // geolocButton.on('click', geolocate);
+
+  geolocButton.on('click', function(e){
+    geolocate();
+    $('#kindly, #submit').removeAttr("hidden");
   });
+
+  addressButton.on('click', function(e){
+    $('#autocomplete, #kindly, #submit').removeAttr("hidden");
+  });
+
+  $( "#toggle-kindly-form" ).click(function() {
+  $( "#kindly-form" ).slideToggle("fast");
+});
   kindlyPostButton.on('click', function(e){
     state.kindly = $('#kindly').val();
     console.log("state with kindly: " + JSON.stringify(state));
@@ -120,4 +249,11 @@ $(function(){
   });
 
 
+});
+
+$(function() {
+    $('a').click(function() {
+        func1();
+        func2();
+    });
 });
