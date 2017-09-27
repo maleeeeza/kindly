@@ -7,8 +7,10 @@ var state = {
   kindly: null
 };
 
-function initMap() {
+var allKindlys = [];
+var map;
 
+function initMap() {
   var styledMapType = new google.maps.StyledMapType(
     [
         {
@@ -91,46 +93,53 @@ function initMap() {
         }
       ],
             {name: 'Kindly Map'});
-
   var kindlyCoords = {lat: 44.975173, lng: -93.274837};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 15,
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 22,
     center: kindlyCoords,
-    mapTypeControlOptions: {
-            mapTypeIds: ['kindly_map']
-          }
+    mapTypeIds: 'kindly_map'
   });
+
   map.mapTypes.set('kindly_map', styledMapType);
-        map.setMapTypeId('kindly_map');
+  map.setMapTypeId('kindly_map');
+
+
+}
+
+function setMarkers(){
+
+  var infoWindow = new google.maps.InfoWindow(), marker, i;
+  var bounds = new google.maps.LatLngBounds();
 
   var image = {
     url: './images/kindly-marker.svg',
     scaledSize: new google.maps.Size(50, 50),
     origin: new google.maps.Point(0,0), // origin
     anchor: new google.maps.Point(0, 0) // anchor
-};
-  var marker = new google.maps.Marker({
-    position: kindlyCoords,
-    map: map,
-    icon:image
-  });
+  };
 
-  marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
+  for (i = 0; i < allKindlys.length; i++) {
+    var kindly = allKindlys[i];
 
-  var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Minneapolis, MN</h1>'+
-            '<div id="bodyContent">'+
-            '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis, orci mattis vestibulum vulputate, augue turpis lobortis leo, ut molestie nibh urna eget elit. Phasellus sed euismod quam. Ut tristique metus massa. Suspendisse mollis et enim vitae blandit. Suspendisse ac lobortis magna. Curabitur nisl dui, dapibus non nunc non, lacinia euismod massa. Duis ut faucibus augue, commodo blandit dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum ut sapien vulputate, vestibulum risus eget, posuere mauris.</p>'+
-            '</div>'+
-            '</div>';
+    marker = new google.maps.Marker({
+      position: {lat: kindly[0], lng: kindly[1]},
+      map: map,
+      icon: image,
+      title: kindly[2]
+    });
+    //Add info window to marker
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+            infoWindow.setContent(allKindlys[i][2]);
+            infoWindow.open(map, marker);
+        }
+    })(marker, i));
 
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
+
+  }
+
+  
+
 
 
 }
@@ -173,8 +182,6 @@ function GetLatlong(){
         });
       }
 
-// Bias the autocomplete object to the user's geographical location,
-// as supplied by the browser's 'navigator.geolocation' object.
 function geolocate() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -203,23 +210,39 @@ function geolocate() {
 }
 
 function saveKindly() {
-
-
   $.ajax({
-        type: "POST",
-        dataType: 'json',
-        data: JSON.stringify(state),
-				contentType: 'application/json',
-        url: "/api/kindlys",
-        success: function(msg) {
-             console.log('YAY');
-             console.log("state: " + JSON.stringify(state));
-             }
-
+    type: "POST",
+    dataType: 'json',
+    data: JSON.stringify(state),
+		contentType: 'application/json',
+    url: "/api/kindlys",
+    success: function(msg) {
+         console.log('YAY');
+         console.log("state: " + JSON.stringify(state));
+         }
     });
 }
 
-
+function getKindlys(){
+  $.ajax({
+    type: "GET",
+    dataType: 'json',
+    // data: data,
+		contentType: 'application/json',
+    url: "/api/kindlys",
+    success: function(msg) {
+       console.log('YAY');
+       console.log(msg);
+       let kindlys = msg.kindlys;
+       for (var i = 0; i < kindlys.length; i++){
+         // pushing to array of array because Google markexpects lat, long, infotext
+         allKindlys.push([kindlys[i].lat, kindlys[i].long, kindlys[i].kindly]);
+       }
+       console.log(allKindlys);
+       setMarkers(map);
+    }
+  });
+}
 
 
 
@@ -229,8 +252,7 @@ $(function(){
   const addressButton = $('#address');
   const kindlyPostButton = $('#submit');
 
-
-  // geolocButton.on('click', geolocate);
+  getKindlys();
 
   geolocButton.on('click', function(e){
     geolocate();
@@ -242,20 +264,11 @@ $(function(){
   });
 
   $( "#toggle-kindly-form" ).click(function() {
-  $( "#kindly-form" ).slideToggle("fast");
-});
-  kindlyPostButton.on('click', function(e){
-    state.kindly = $('#kindly').val();
-    console.log("state with kindly: " + JSON.stringify(state));
-    saveKindly();
+    $( "#kindly-form" ).slideToggle("fast");
   });
 
-
-});
-
-$(function() {
-    $('a').click(function() {
-        func1();
-        func2();
-    });
+  kindlyPostButton.on('click', function(e){
+    state.kindly = $('#kindly').val();
+    saveKindly();
+  });
 });

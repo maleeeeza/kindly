@@ -2,7 +2,7 @@ header {
   height:auto;
   width: 100%;
   background-color: $tertiary-color;
-  padding: 10px;
+  // padding: 10px;
   overflow: hidden;
   text-align: center;
 }
@@ -10,4 +10,5 @@ header {
 header p {
   font: $header-font;
   color: $quaternary-color;
+  margin:20px;
 }

@@ -393,10 +393,6 @@ template {
   float: left;
   height: 50px; }
 
-.post-kindly-icon {
-  height: 50px;
-  vertical-align: middle; }
-
 .navbar {
   height: 50px;
   background-color: #ffffff;
@@ -406,13 +402,13 @@ header {
   height: auto;
   width: 100%;
   background-color: #e5018c;
-  padding: 10px;
   overflow: hidden;
   text-align: center; }
 
 header p {
   font: 700 150% viato, sans-serif;
-  color: #ffffff; }
+  color: #ffffff;
+  margin: 20px; }
 
 .hidden {
   display: none; }
@@ -445,6 +441,13 @@ textarea, input {
   border-radius: 10px;
   border: 1px solid #666666; }
 
+button:focus {
+  outline: 0; }
+
+.post-kindly-icon {
+  height: 50px;
+  vertical-align: middle; }
+
 .button-kindly-post {
   color: #39bced;
   font: 700 150% viato, sans-serif;
@@ -453,6 +456,9 @@ textarea, input {
   vertical-align: middle;
   border: none;
   padding: 0; }
+  @media only screen and (max-width: 700px) {
+    .button-kindly-post {
+      font-size: 0; } }
 
 .form-button {
   width: 200px;
@@ -465,6 +471,9 @@ textarea, input {
   padding: 20px;
   color: #ffffff;
   border-radius: 10px; }
+  @media only screen and (max-width: 700px) {
+    .form-button {
+      font-size: 80%; } }
 
 .submit-kindly {
   width: 60vw;
@@ -472,24 +481,23 @@ textarea, input {
   font: 700 150% viato, sans-serif;
   background: #e5018c;
   vertical-align: middle;
-  border: 1px solid #e5018c;
   padding: 10px;
-  margin: 10px; }
+  margin: 10px;
+  border-radius: 10px;
+  border: none; }
   @media only screen and (max-width: 700px) {
     .submit-kindly {
-      width: 90vw; } }
+      width: 90vw;
+      font-size: 80%; } }
 
 #map {
   height: 100vh;
-  width: 100%;
-  overflow: hidden; }
+  width: 100%; }
 
 body {
   font-family: Helvetica, sans-serif;
   color: #666666;
-  font-size: 18px; }
-
-button:focus {
-  outline: 0; }
+  font-size: 18px;
+  overflow-x: hidden; }
 
 /*# sourceMappingURL=main.css.map */

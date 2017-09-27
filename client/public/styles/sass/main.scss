@@ -29,8 +29,5 @@ body {
   font-family: $font-stack;
   color: #666666;
   font-size: 18px;
-}
-
-button:focus {
-  outline:0;
+  overflow-x:hidden;
 }

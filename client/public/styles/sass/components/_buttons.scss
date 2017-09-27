@@ -1,3 +1,13 @@
+button:focus {
+  outline:0;
+}
+
+.post-kindly-icon {
+  height: 50px;
+  vertical-align: middle;
+
+}
+
 .button-kindly-post {
   color: $secondary-color;
   font: $header-font;
@@ -6,6 +16,10 @@
   vertical-align: middle;
   border: none;
   padding: 0;
+
+  @media only screen and #{$break-small} {
+      font-size: 0;
+  }
 }
 
 .form-button {
@@ -19,6 +33,10 @@
   padding: 20px;
   color: $quaternary-color;
   border-radius: 10px;
+
+  @media only screen and #{$break-small} {
+      font-size: 80%;
+  }
 }
 
 .submit-kindly {
@@ -27,11 +45,13 @@
   font: $header-font;
   background: $tertiary-color;
   vertical-align: middle;
-  border: 1px solid $tertiary-color;
   padding: 10px;
   margin:10px;
+  border-radius: 10px;
+  border: none;
 
   @media only screen and #{$break-small} {
       width:90vw;
+      font-size: 80%;
   }
 }
