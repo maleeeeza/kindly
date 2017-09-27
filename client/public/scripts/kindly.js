@@ -1,3 +1,8 @@
+// style on map set to 100vh but want it to cover page without scroll bar
+// issues: markers is only right size for one, wrong size when zooming
+// works locally, not in prod
+// style, center form/buttons
+
 var placeSearch, autocomplete;
 
 
@@ -9,6 +14,7 @@ var state = {
 
 var allKindlys = [];
 var map;
+
 
 function initMap() {
   var styledMapType = new google.maps.StyledMapType(
@@ -91,11 +97,11 @@ function initMap() {
             }
         ]
         }
-      ],
-            {name: 'Kindly Map'});
+      ], {name: 'Kindly Map'});
+
   var kindlyCoords = {lat: 44.975173, lng: -93.274837};
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 22,
+    zoom: 15,
     center: kindlyCoords,
     mapTypeIds: 'kindly_map'
   });
@@ -138,7 +144,7 @@ function setMarkers(){
 
   }
 
-  
+
 
 
 
