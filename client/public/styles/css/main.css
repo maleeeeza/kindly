@@ -414,6 +414,7 @@ header p {
   display: none; }
 
 form {
+  width: 1000px;
   margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto; }

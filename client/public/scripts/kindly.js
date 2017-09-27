@@ -1,8 +1,7 @@
 // style on map set to 100vh but want it to cover page without scroll bar
 // issues: markers is only right size for one, wrong size when zooming
-// works locally, not in prod
 // style, center form/buttons
-//"refresh" after posting so map populates
+//"refresh" after posting so map populates - dump markers and set markers again in post success handler
 
 var placeSearch, autocomplete;
 
@@ -224,6 +223,7 @@ function saveKindly() {
 		contentType: 'application/json',
     url: "/api/kindlys",
     success: function(msg) {
+        window.location.replace("/");
          console.log('YAY');
          console.log("state: " + JSON.stringify(state));
          }
