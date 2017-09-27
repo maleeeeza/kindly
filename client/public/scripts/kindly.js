@@ -2,6 +2,7 @@
 // issues: markers is only right size for one, wrong size when zooming
 // works locally, not in prod
 // style, center form/buttons
+//"refresh" after posting so map populates
 
 var placeSearch, autocomplete;
 
@@ -253,7 +254,7 @@ function getKindlys(){
 
 
 $(function(){
-
+  initAutocomplete();
   const geolocButton = $('#current-location');
   const addressButton = $('#address');
   const kindlyPostButton = $('#submit');
