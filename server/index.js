@@ -1,13 +1,22 @@
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
+const passport = require('passport');
 
 const app = express();
 const {DATABASE_URL} = require('./config');
-const {router: usersRouter} = require('./users');
 const {router: kindlyRouter} = require('./kindly');
+const {router: usersRouter} = require('./users');
+const {router: authRouter, basicStrategy, jwtStrategy} = require('./auth');
 
 mongoose.Promise = global.Promise;
+app.use(morgan('common'));
+
+app.use(passport.initialize());
+passport.use(basicStrategy);
+passport.use(jwtStrategy);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -16,8 +25,11 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+
 app.use('/api', kindlyRouter);
 app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
 
 
 
