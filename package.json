@@ -24,15 +24,22 @@
   "author": "Joe Turner <jturner@thinkful.com>",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.1",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "cross-env": "^3.1.4",
+    "dotenv": "^4.0.0",
     "express": "^4.14.1",
     "http-proxy-middleware": "^0.17.3",
+    "jsonwebtoken": "^8.0.1",
     "mocha": "^3.5.3",
     "mongoose": "^4.10.8",
+    "morgan": "^1.9.0",
     "npm-run-all": "^4.0.1",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-jwt": "^3.0.0",
     "xp": "^1.0.1"
   }
 }

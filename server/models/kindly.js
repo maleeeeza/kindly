@@ -1,5 +1,3 @@
-// const mongoose, {Schema} = require("mongoose");
-
 const mongoose = require('mongoose');
 
 const KindlySchema = mongoose.Schema({

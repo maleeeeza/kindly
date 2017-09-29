@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 
 const app = express();
 const {DATABASE_URL} = require('./config');
-const {router} = require('./kindly/router');
+const {router: usersRouter} = require('./users');
+const {router: kindlyRouter} = require('./kindly');
 
 mongoose.Promise = global.Promise;
 
@@ -14,7 +15,9 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Methods: POST');
   next();
 });
-app.use('/api', router);
+
+app.use('/api', kindlyRouter);
+app.use('/api/users/', usersRouter);
 
 
 
