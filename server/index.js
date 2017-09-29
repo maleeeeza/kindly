@@ -37,7 +37,15 @@ app.use('/api/auth/', authRouter);
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/public')));
 
-
+app.get(
+    '/api/protected',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+      return res.json({
+        data: 'cantaloupe'
+      });
+    }
+  );
 
 // Unhandled requests which aren't for the API should serve index.html so
 // client-side routing using browserHistory can function
