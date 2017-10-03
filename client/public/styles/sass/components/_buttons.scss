@@ -1,3 +1,8 @@
+button {
+  cursor: pointer;
+}
+
+
 button:focus {
   outline:0;
 }
@@ -22,10 +27,8 @@ button:focus {
   }
 }
 
-.form-button {
-  width: 200px;
+.form-button, .login-button, .cancel-button {
   height: auto;
-  background-color: $secondary-color;
   font-family: $font-stack;
   font-weight: bold;
   vertical-align: middle;
@@ -37,6 +40,17 @@ button:focus {
   @media only screen and #{$break-small} {
       font-size: 80%;
   }
+}
+
+.form-button {
+  width: 200px;
+  background-color: $secondary-color;
+}
+
+.login-button {
+  width: 100px;
+  float: right;
+  background-color: $secondary-color;
 }
 
 .submit-kindly {
@@ -54,4 +68,14 @@ button:focus {
       width:90vw;
       font-size: 80%;
   }
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    width: auto;
+    background-color: $tertiary-color;
 }

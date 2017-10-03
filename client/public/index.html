@@ -14,7 +14,40 @@
       <img src="images/post-kindly.svg" class="post-kindly-icon" alt="Post a Kindly"/>
       Post a kindly
     </button>
+    <button onclick="document.getElementById('id01').style.display='block'" class="login-button">Login</button>
   </nav>
+
+  <!-- Button to open the modal login form -->
+
+
+<!-- The Modal -->
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none' class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form id="form" class="modal-content animate" action="#">
+    <div class="imgcontainer">
+      <img src="images/kindly.svg" class="logo" alt="Kindly"/>
+    </div>
+
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <button type="submit" class="login-button">Login</button>
+
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+      <span class="new-account"><a href="#">Create Account</a></span>
+    </div>
+  </form>
+</div>
 
 
   <form id="kindly-form" class='hidden'>
@@ -51,7 +84,9 @@
   </main>
   <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCO3ak9ZUiaSK4JOH6ID3TyQYhUQQCVmeI&libraries=places"></script>
   <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js"></script>
   <script type="text/javascript" src="/scripts/kindly.js"></script>
+
 
 </body>
 </html>

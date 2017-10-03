@@ -251,13 +251,59 @@ function getKindlys(){
   });
 }
 
+function logMeIn(formData) {
+
+  const loginURL = '/api/auth/login';
+  const { uname, psw } = formData;
+  console.log(formData);
+
+
+
+  /** Set the auth headers we need before sending request. */
+  function setHeader(req) {
+
+    const encodedStr = btoa(`${uname}:${psw}`);
+
+    req.setRequestHeader('Authorization', 'Basic ' + encodedStr);
+
+
+  }
+
+  function handleSuccess(res) {
+
+      Cookies.set('authToken', res.authToken);
+
+    }
+
+  const infoSettings = {
+    url: loginURL,
+    type: 'POST',
+    beforeSend: setHeader,
+    data: formData,
+    success: handleSuccess,
+    error: function(err) {
+      console.log(err);
+    }
+  };
+
+  $.ajax(infoSettings);
+
+}
+
+
+
+
 
 
 $(function(){
+  console.log(Cookies.get());
   initAutocomplete();
   const geolocButton = $('#current-location');
   const addressButton = $('#address');
   const kindlyPostButton = $('#submit');
+  const loginModal = $('#login-modal')
+
+
 
   getKindlys();
 
@@ -278,4 +324,28 @@ $(function(){
     state.kindly = $('#kindly').val();
     saveKindly();
   });
+
+  loginModal.on('click', function(e){
+    modal.style.display = 'none';
+  });
+
+  $('#form').on('submit', function(e) {
+  e.preventDefault();
+
+  const formData = {};
+
+  $('#form input').each(function() {
+
+    let { name, value } = this;
+    console.log(name, value);
+    formData[name] = value;
+
+
+  });
+
+  logMeIn(formData);
+});
+
+
+
 });
