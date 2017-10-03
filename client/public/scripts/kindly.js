@@ -157,12 +157,10 @@ function initAutocomplete() {
   autocomplete = new google.maps.places.Autocomplete(
       /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
       {types: ['geocode']});
-      console.log(autocomplete);
   autocomplete.addListener('place_changed', function(){
 
     //get place
     var place = autocomplete.getPlace();
-    console.log(place);
 
     GetLatlong();
 
@@ -181,10 +179,8 @@ function GetLatlong(){
                 var longitude = results[0].geometry.location.lng();
 
             }
-            console.log(latitude + ' ' + longitude);
             state.lat = latitude;
             state.long = longitude;
-            console.log("state: " + JSON.stringify(state));
         });
       }
 
@@ -203,9 +199,7 @@ function geolocate() {
         center: geolocation,
         radius: position.coords.accuracy
       });
-      console.log("geolocation:" + geolocation.lat + "  " + geolocation.lng);
-      console.log("circle:" + circle.center + circle.radius);
-      console.log("state: " + JSON.stringify(state));
+
 
       autocomplete.setBounds(circle.getBounds());
 
@@ -224,8 +218,7 @@ function saveKindly() {
     url: "/api/kindlys",
     success: function(msg) {
         window.location.replace("/");
-         console.log('YAY');
-         console.log("state: " + JSON.stringify(state));
+
          }
     });
 }
@@ -238,14 +231,12 @@ function getKindlys(){
 		contentType: 'application/json',
     url: "/api/kindlys",
     success: function(msg) {
-       console.log('YAY');
-       console.log(msg);
+
        let kindlys = msg.kindlys;
        for (var i = 0; i < kindlys.length; i++){
          // pushing to array of array because Google markexpects lat, long, infotext
          allKindlys.push([kindlys[i].lat, kindlys[i].long, kindlys[i].kindly]);
        }
-       console.log(allKindlys);
        setMarkers(map);
     }
   });
@@ -255,7 +246,6 @@ function logMeIn(formData) {
 
   const loginURL = '/api/auth/login';
   const { uname, psw } = formData;
-  console.log(formData);
 
 
 
@@ -296,7 +286,6 @@ function logMeIn(formData) {
 
 
 $(function(){
-  console.log(Cookies.get());
   initAutocomplete();
   const geolocButton = $('#current-location');
   const addressButton = $('#address');
@@ -337,7 +326,6 @@ $(function(){
   $('#form input').each(function() {
 
     let { name, value } = this;
-    console.log(name, value);
     formData[name] = value;
 
 
