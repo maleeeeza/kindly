@@ -211,15 +211,20 @@ function geolocate() {
 
 function saveKindly() {
   $.ajax({
+    url: "/api/kindlys",
     type: "POST",
     dataType: 'json',
     data: JSON.stringify(state),
 		contentType: 'application/json',
-    url: "/api/kindlys",
-    success: function(msg) {
-        window.location.replace("/");
+    beforeSend: function(req){
+    const authCookie = Cookies.get('authToken');
+      req.setRequestHeader('Authorization', 'Bearer ' + authCookie);
+    },
+    success: function(data) {
+      console.log(data);
+      window.location.replace("/");
 
-         }
+      }
     });
 }
 
@@ -280,6 +285,14 @@ function logMeIn(formData) {
 
 }
 
+function isLoggedIn(){
+  if (Cookies.get('authToken')) {
+    console.log(Cookies.get('authToken'));
+    return true;
+
+  }
+}
+
 
 
 
@@ -305,13 +318,21 @@ $(function(){
     $('#autocomplete, #kindly, #submit').removeAttr("hidden");
   });
 
-  $( "#toggle-kindly-form" ).click(function() {
+
+  $( "#toggle-kindly-form" ).click(function(e) {
+    if(isLoggedIn()){
     $( "#kindly-form" ).slideToggle("fast");
+  } else {
+    $('#id01').css('display', "block");
+  }
   });
 
   kindlyPostButton.on('click', function(e){
-    state.kindly = $('#kindly').val();
-    saveKindly();
+
+      state.kindly = $('#kindly').val();
+      saveKindly();
+
+
   });
 
   loginModal.on('click', function(e){
@@ -332,6 +353,7 @@ $(function(){
   });
 
   logMeIn(formData);
+  $('#id01').css('display', "none");
 });
 
 

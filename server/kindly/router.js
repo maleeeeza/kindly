@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const Kindly = require('../models/kindly');
 const router = express.Router();
+const passport = require('passport');
 
 router.use(jsonParser);
-
 
 
 
@@ -26,7 +26,7 @@ router.get('/kindlys', (req, res) => {
 });
 
 // Create a new kindly
-router.post("/kindlys", (req, res) => {
+router.post("/kindlys", passport.authenticate('jwt', { session: false }), (req, res) => {
   const requiredFields = ['lat', 'long', 'kindly'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
