@@ -41,7 +41,8 @@ router.post("/kindlys", passport.authenticate('jwt', { session: false }), (req, 
     .create({
       lat: req.body.lat,
       long: req.body.long,
-      kindly: req.body.kindly})
+      kindly: req.body.kindly,
+      creator: req.body.creator})
     .then(
       kindly => {
         res.status(201).json({message: 'Kindly Created'})

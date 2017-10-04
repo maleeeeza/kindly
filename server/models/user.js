@@ -14,14 +14,17 @@ const UserSchema = mongoose.Schema({
         required: true
     },
     firstName: {type: String, default: ''},
-    lastName: {type: String, default: ''}
+    lastName: {type: String, default: ''},
+    kindlys: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Kindly' }]
 });
 
 UserSchema.methods.apiRepr = function() {
     return {
+        id: this._id,
         username: this.username || '',
         firstName: this.firstName || '',
-        lastName: this.lastName || ''
+        lastName: this.lastName || '',
+        kindlys: this.kindlys
     };
 };
 

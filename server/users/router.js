@@ -118,7 +118,8 @@ router.post('/', jsonParser, (req, res) => {
                 username,
                 password: hash,
                 firstName,
-                lastName
+                lastName,
+                kindlys:[]
             });
         })
         .then(user => {
