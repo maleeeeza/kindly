@@ -1,7 +1,6 @@
 // style on map set to 100vh but want it to cover page without scroll bar
 // issues: markers is only right size for one, wrong size when zooming
 // style, center form/buttons
-//"refresh" after posting so map populates - dump markers and set markers again in post success handler
 
 var placeSearch, autocomplete;
 
@@ -13,7 +12,10 @@ var state = {
 };
 
 var allKindlys = [];
+
+var userKindlys = [];
 var map;
+var userId;
 
 
 function initMap() {
@@ -232,7 +234,6 @@ function getKindlys(){
   $.ajax({
     type: "GET",
     dataType: 'json',
-    // data: data,
 		contentType: 'application/json',
     url: "/api/kindlys",
     success: function(msg) {
@@ -247,27 +248,47 @@ function getKindlys(){
   });
 }
 
+function getKindlysById(){
+
+
+  $.ajax({
+
+    type:"GET",
+    dataType:'json',
+    beforeSend: function(req){
+      isLoggedIn();
+      const authCookie = Cookies.get('authToken');
+        req.setRequestHeader('Authorization', 'Bearer ' + authCookie);
+    },
+    contentType: 'application/json',
+    url: "/api/kindlys/" + userId,
+    success: function(msg){
+      let kindlys = msg.kindlys;
+      console.log(msg);
+      for (var i = 0; i < kindlys.length; i++){
+        userKindlys.push([kindlys[i].createdDate, kindlys[i].kindly]);
+      }
+
+    }
+  });
+  console.log(JSON.stringify(userKindlys));
+}
+
+
 function logMeIn(formData) {
 
   const loginURL = '/api/auth/login';
   const { uname, psw } = formData;
 
-
-
   /** Set the auth headers we need before sending request. */
   function setHeader(req) {
-
     const encodedStr = btoa(`${uname}:${psw}`);
-
     req.setRequestHeader('Authorization', 'Basic ' + encodedStr);
-
-
   }
 
   function handleSuccess(res) {
-
       Cookies.set('authToken', res.authToken);
-
+      getUserId();
     }
 
   const infoSettings = {
@@ -288,10 +309,19 @@ function logMeIn(formData) {
 function isLoggedIn(){
   if (Cookies.get('authToken')) {
     console.log(Cookies.get('authToken'));
+    getUserId();
     return true;
 
   }
 }
+
+function getUserId(){
+    var jwt = Cookies.get('authToken');
+    var tokens = jwt.split(".");
+    var userObject = JSON.parse(atob(tokens[1]));
+    userId = userObject.user.id;
+}
+
 
 
 
@@ -303,22 +333,24 @@ $(function(){
   const geolocButton = $('#current-location');
   const addressButton = $('#address');
   const kindlyPostButton = $('#submit');
-  const loginModal = $('#login-modal')
+  const loginModal = $('#login-modal');
 
 
 
   getKindlys();
 
+  //find current location - lat/long
   geolocButton.on('click', function(e){
     geolocate();
     $('#kindly, #submit').removeAttr("hidden");
   });
 
+  //show address field
   addressButton.on('click', function(e){
     $('#autocomplete, #kindly, #submit').removeAttr("hidden");
   });
 
-
+  //toggle kindly form if logged in
   $( "#toggle-kindly-form" ).click(function(e) {
     if(isLoggedIn()){
     $( "#kindly-form" ).slideToggle("fast");
@@ -327,35 +359,57 @@ $(function(){
   }
   });
 
+  // submit kindly
   kindlyPostButton.on('click', function(e){
-
       state.kindly = $('#kindly').val();
       saveKindly();
-
-
   });
 
+  // show login modal
   loginModal.on('click', function(e){
     modal.style.display = 'none';
   });
 
+  // login
   $('#form').on('submit', function(e) {
   e.preventDefault();
 
   const formData = {};
 
   $('#form input').each(function() {
-
     let { name, value } = this;
     formData[name] = value;
-
-
   });
 
   logMeIn(formData);
   $('#id01').css('display', "none");
+  window.location.replace("/");
+
+
 });
 
 
+//Validate if user is logged in and update userID
+if(isLoggedIn()){
+  $('#login').attr('hidden', true);
+  $('#toggle-kindly-form').removeAttr('hidden');
+  $('#logout').removeAttr('hidden');
+  $('#my-kindlys').removeAttr('hidden');
+};
+
+//Show My Kindlys
+$('#my-kindlys').on('click', function(e){
+  getKindlysById();
+  setTimeout(function(){
+      $('#my-kindlys-list').append(userKindlys);
+  }, 1000);
+
+});
+
+//logout
+$('#logout').on('click', function(e){
+  document.cookie = 'authToken' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  window.location.replace("/");
+})
 
 });

@@ -10,11 +10,13 @@
 <body>
   <nav class="navbar">
     <img src="images/kindly.svg" class="logo" alt="Kindly"/>
-    <button id="toggle-kindly-form" class="button-kindly-post " type="button">
+    <button id="toggle-kindly-form" class="button-kindly-post " type="button" hidden>
       <img src="images/post-kindly.svg" class="post-kindly-icon" alt="Post a Kindly"/>
       Post a kindly
     </button>
-    <button onclick="document.getElementById('id01').style.display='block'" class="login-button">Login</button>
+    <button id="login" onclick="document.getElementById('id01').style.display='block'" class="login-button">Login</button>
+    <button id="logout" class="logout-button" hidden>Logout</button>
+    <button id="my-kindlys" class="my-kindlys-button" hidden>My Kindlys</button>
   </nav>
 
   <!-- Button to open the modal login form -->
@@ -73,13 +75,18 @@
     <header>
       <p>
         The Kindly project is intended to track random acts of kindness in hopes of creating empathetic and compassionate communities worldwide. <br/>
-        Post a kindly or browse kindlys in your area!
+        Browse kindlys in your area or login to post a kindly!
       </p>
     </header>
 
 
 
     <div id="map"></div>
+    <div id="my-kindlys-list">
+
+      test test 
+
+    </div>
 
   </main>
   <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCO3ak9ZUiaSK4JOH6ID3TyQYhUQQCVmeI&libraries=places"></script>
