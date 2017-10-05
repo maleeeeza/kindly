@@ -12,6 +12,7 @@ const createAuthToken = user => {
     });
 };
 
+
 const router = express.Router();
 
 router.post(
@@ -21,7 +22,6 @@ router.post(
     (req, res) => {
         const authToken = createAuthToken(req.user.apiRepr());
         res.json({authToken});
-        console.log(req, res);
     }
 );
 
