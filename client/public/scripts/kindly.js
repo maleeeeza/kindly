@@ -271,7 +271,33 @@ function getKindlysById(){
 
     }
   });
-  console.log(JSON.stringify(userKindlys));
+}
+
+function signUp(formData){
+
+
+  $.ajax({
+    url: "/api/users",
+    type: "POST",
+    dataType: 'json',
+    data: JSON.stringify(formData),
+		contentType: 'application/json',
+    success: function(data) {
+      console.log(data);
+      var loginCredentials = {
+        uname: formData.username,
+        psw: formData.password
+      }
+
+      logMeIn(loginCredentials);
+
+      setTimeout(function(){
+          window.location.replace("/");
+      }, 1000);
+
+
+      }
+    });
 }
 
 
@@ -308,7 +334,6 @@ function logMeIn(formData) {
 
 function isLoggedIn(){
   if (Cookies.get('authToken')) {
-    console.log(Cookies.get('authToken'));
     getUserId();
     return true;
 
@@ -365,11 +390,6 @@ $(function(){
       saveKindly();
   });
 
-  // show login modal
-  loginModal.on('click', function(e){
-    modal.style.display = 'none';
-  });
-
   // login
   $('#form').on('submit', function(e) {
   e.preventDefault();
@@ -382,16 +402,31 @@ $(function(){
   });
 
   logMeIn(formData);
-  $('#id01').css('display', "none");
+  // $('#id01').css('display', "none");
   window.location.replace("/");
 
 
+});
+
+// signup
+$('#signup-form').on('submit', function(e) {
+e.preventDefault();
+
+const formData = {};
+
+$('#signup-form input').each(function() {
+  let { name, value } = this;
+  formData[name] = value;
+});
+
+signUp(formData);
 });
 
 
 //Validate if user is logged in and update userID
 if(isLoggedIn()){
   $('#login').attr('hidden', true);
+  $('#signup').attr('hidden', true);
   $('#toggle-kindly-form').removeAttr('hidden');
   $('#logout').removeAttr('hidden');
   $('#my-kindlys').removeAttr('hidden');
