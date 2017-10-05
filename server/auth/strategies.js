@@ -8,11 +8,10 @@ const {
   ExtractJwt
 } = require('passport-jwt');
 
-const { User } = require('../models/user');
+const User = require('../models/user');
 const { JWT_SECRET } = require('../config');
 
 const basicStrategy = new BasicStrategy((username, password, callback) => {
-  console.log(username);
   let user;
   User.findOne({ username: username })
     .then(_user => {
