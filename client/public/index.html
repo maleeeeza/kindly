@@ -17,7 +17,7 @@
     <button id="login" onclick="document.getElementById('id01').style.display='block'" class="login-button">Login</button>
     <button id="signup" onclick="document.getElementById('signup-modal').style.display='block'" class="login-button">SignUp</button>
     <button id="logout" class="logout-button" hidden>Logout</button>
-    <button id="my-kindlys" class="my-kindlys-button" hidden>My Kindlys</button>
+    <button id="my-kindlys" onclick="document.getElementById('my-kindlys-modal').style.display='block'" class="my-kindlys-button" hidden>My Kindlys</button>
   </nav>
 
 
@@ -83,6 +83,32 @@
   </form>
 </div>
 
+<!-- The My Kindlys Modal -->
+<div id="my-kindlys-modal" class="modal">
+
+  <span onclick="document.getElementById('my-kindlys-modal').style.display='none' class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <div id="my-kindlys-content" class="modal-content animate">
+    <div class="imgcontainer">
+      <img src="images/kindly.svg" class="logo" alt="Kindly"/>
+    </div>
+
+    <div class="container">
+      <ul id="my-kindlys-list" class"my-kindlys-list">
+
+
+      </ul>
+
+    </div>
+    <button id="delete-button" class="logout-button" data-id="59d65b0ad3356f333da23e90">Delete</button>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('my-kindlys-modal').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- Kindly Post -->
   <form id="kindly-form" class='hidden'>
@@ -115,9 +141,7 @@
 
 
     <div id="map"></div>
-    <!-- <div id="my-kindlys-list">
-      test test
-    </div> -->
+
 
   </main>
   <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCO3ak9ZUiaSK4JOH6ID3TyQYhUQQCVmeI&libraries=places"></script>

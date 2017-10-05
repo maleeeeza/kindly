@@ -6,14 +6,19 @@ var placeSearch, autocomplete;
 var state = {
   lat: null,
   long: null,
-  kindly: null
+  kindly: null,
+  creator: userId,
 };
 
 var allKindlys = [];
 
-var userKindlys = [];
+var userKindlys = {
+  kindlys: []
+};
+
 var map;
 var userId;
+
 
 
 function initMap() {
@@ -108,8 +113,6 @@ function initMap() {
 
   map.mapTypes.set('kindly_map', styledMapType);
   map.setMapTypeId('kindly_map');
-
-
 }
 
 function setMarkers(){
@@ -263,13 +266,14 @@ function getKindlysById(){
     url: "/api/kindlys/" + userId,
     success: function(msg){
       let kindlys = msg.kindlys;
-      console.log(msg);
+      // console.log(msg);
       for (var i = 0; i < kindlys.length; i++){
-        userKindlys.push([kindlys[i].createdDate, kindlys[i].kindly]);
+        userKindlys.kindlys.push({createdDate: kindlys[i].createdDate, kindly: kindlys[i].kindly, id: kindlys[i]._id});
       }
 
     }
   });
+  console.log(userKindlys);
 }
 
 function signUp(formData){
@@ -298,7 +302,6 @@ function signUp(formData){
       }
     });
 }
-
 
 function logMeIn(formData) {
 
@@ -344,12 +347,70 @@ function getUserId(){
     var tokens = jwt.split(".");
     var userObject = JSON.parse(atob(tokens[1]));
     userId = userObject.user.id;
+    state.creator = userId;
+
 }
 
 
 
+function deleteMyKindly(kindlyId){
+  $.ajax({
+    type:"DELETE",
+    dataType:'json',
+    beforeSend: function(req){
+      isLoggedIn();
+      const authCookie = Cookies.get('authToken');
+        req.setRequestHeader('Authorization', 'Bearer ' + authCookie);
+    },
+    contentType: 'application/json',
+    url: "/api/kindlys/" + kindlyId,
+    success: function(msg){
+      console.log(msg);
+    }
+  });
+}
 
 
+function generateMyKindlysString(kindlys) {
+  console.log('Generating ');
+
+  const items = kindlys.map((item, index) =>
+    generateMyKindlyElement(item, index)
+  );
+
+  return items.join('');
+}
+
+function generateMyKindlyElement(kindly, kindlyIndex){
+  let myKindlyHTML = (
+    `
+      <span class="my-kindly-createdDate">${kindly.createdDate}</span>
+      <span class="my-kindly">${kindly.kindly}</span>
+      <button type="button" id="delete-button" class="delete-my-kindly" data-id="${kindly.id}">Delete</button>
+    `
+  );
+
+  return (
+    `<li class="js-item-index-element" data-item-index="${kindlyIndex}" data-id: "${kindly.id}">
+      ${myKindlyHTML}
+    </li>`
+  );
+}
+
+function renderMyKindlyList() {
+  console.log('`rendermyKindlyList` ran');
+  let { kindlys } = userKindlys;
+  const myKindlyListString = generateMyKindlysString(kindlys);
+
+  // insert that HTML into the DOM
+  $('#my-kindlys-list').html(myKindlyListString);
+
+  $('.delete-my-kindly').on('click', function(e){
+    deleteMyKindly($(this).attr('data-id'));
+    var li = $(this).closest('li')
+    li.fadeOut('slow', function() { li.remove(); });
+  });
+}
 
 
 $(function(){
@@ -392,15 +453,12 @@ $(function(){
 
   // login
   $('#form').on('submit', function(e) {
-  e.preventDefault();
-
-  const formData = {};
-
-  $('#form input').each(function() {
-    let { name, value } = this;
-    formData[name] = value;
+    e.preventDefault();
+    const formData = {};
+    $('#form input').each(function() {
+      let { name, value } = this;
+      formData[name] = value;
   });
-
   logMeIn(formData);
   // $('#id01').css('display', "none");
   window.location.replace("/");
@@ -410,16 +468,13 @@ $(function(){
 
 // signup
 $('#signup-form').on('submit', function(e) {
-e.preventDefault();
-
-const formData = {};
-
-$('#signup-form input').each(function() {
+  e.preventDefault();
+  const formData = {};
+  $('#signup-form input').each(function() {
   let { name, value } = this;
   formData[name] = value;
 });
-
-signUp(formData);
+  signUp(formData);
 });
 
 
@@ -436,10 +491,24 @@ if(isLoggedIn()){
 $('#my-kindlys').on('click', function(e){
   getKindlysById();
   setTimeout(function(){
-      $('#my-kindlys-list').append(userKindlys);
+      renderMyKindlyList();
   }, 1000);
 
 });
+
+
+$('#delete-button').on('click', function(e){
+  console.log("test");
+  deleteMyKindly($(this).attr('data-id'));
+})
+
+// //delete my kindly
+// $('#delete-my-kindly').on('click', function(e){
+//   // var idFromButton = $(this).attr('data-id');
+//   console.log("hi");
+// });
+// handleKindlyDelete();
+
 
 //logout
 $('#logout').on('click', function(e){
