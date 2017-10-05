@@ -20,10 +20,9 @@
     <button id="my-kindlys" class="my-kindlys-button" hidden>My Kindlys</button>
   </nav>
 
-  <!-- Button to open the modal login form -->
 
 
-<!-- The Modal -->
+<!-- The Login Modal -->
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none' class="close" title="Close Modal">&times;</span>
 
@@ -35,10 +34,10 @@
 
     <div class="container">
       <label><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <input type="text" placeholder="Enter Username" name="uname" class="modal-input" required>
 
       <label><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" placeholder="Enter Password" name="psw" class="modal-input" required>
 
       <button type="submit" class="login-button">Login</button>
 
@@ -51,6 +50,7 @@
   </form>
 </div>
 
+<!-- The SignUp Modal -->
 <div id="signup-modal" class="modal">
   <span onclick="document.getElementById('signup-modal').style.display='none' class="close" title="Close Modal">&times;</span>
 
@@ -62,16 +62,16 @@
 
     <div class="container">
       <label><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="username" required>
+      <input type="text" placeholder="Enter Username" name="username" class="modal-input" required>
 
       <label><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password" required>
+      <input type="password" placeholder="Enter Password" name="password" class="modal-input" required>
 
       <label><b>First Name</b></label>
-      <input type="text" placeholder="Enter First Name" name="firstName">
+      <input type="text" placeholder="Enter First Name" name="firstName" class="modal-input">
 
       <label><b>Last Name</b></label>
-      <input type="text" placeholder="Enter Last Name" name="lastName">
+      <input type="text" placeholder="Enter Last Name" name="lastName" class="modal-input">
 
       <button type="submit" class="login-button">SignUp!</button>
 
@@ -84,6 +84,7 @@
 </div>
 
 
+<!-- Kindly Post -->
   <form id="kindly-form" class='hidden'>
 
     <div>
@@ -95,7 +96,7 @@
 
     </div>
     <div>
-      <input id="autocomplete" placeholder="Enter your address" type="text" class="address-field" hidden /> <br />
+      <input id="autocomplete" placeholder="Enter your address" type="text" class="address-field" hidden/> </input><br />
       <textarea id="kindly" placeholder="Enter act of kindness" type="text" class="kindly-field" hidden/></textarea>
       <button id="submit" type="button" class="submit-kindly" hidden>Post Kindly</button>
     </div>
@@ -114,9 +115,9 @@
 
 
     <div id="map"></div>
-    <div id="my-kindlys-list">
+    <!-- <div id="my-kindlys-list">
       test test
-    </div>
+    </div> -->
 
   </main>
   <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCO3ak9ZUiaSK4JOH6ID3TyQYhUQQCVmeI&libraries=places"></script>

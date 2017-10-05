@@ -1,5 +1,3 @@
-// style on map set to 100vh but want it to cover page without scroll bar
-// issues: markers is only right size for one, wrong size when zooming
 // style, center form/buttons
 
 var placeSearch, autocomplete;
@@ -120,7 +118,8 @@ function setMarkers(){
   var bounds = new google.maps.LatLngBounds();
 
   var image = {
-    url: './images/kindly-marker.svg',
+    url: './images/kindly-marker.png',
+    size: new google.maps.Size(50, 50),
     scaledSize: new google.maps.Size(50, 50),
     origin: new google.maps.Point(0,0), // origin
     anchor: new google.maps.Point(0, 0) // anchor
@@ -368,6 +367,7 @@ $(function(){
   geolocButton.on('click', function(e){
     geolocate();
     $('#kindly, #submit').removeAttr("hidden");
+    $('#autocomplete').attr('hidden', true);
   });
 
   //show address field

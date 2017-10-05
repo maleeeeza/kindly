@@ -408,13 +408,17 @@ header {
 header p {
   font: 700 150% viato, sans-serif;
   color: #ffffff;
-  margin: 20px; }
+  margin: 20px;
+  vertical-align: middle; }
+  @media only screen and (max-width: 700px) {
+    header p {
+      font-size: 90%; } }
 
 .hidden {
   display: none; }
 
 form {
-  width: 1000px;
+  width: 100%;
   margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto; }
@@ -509,7 +513,7 @@ textarea, input {
   to {
     transform: scale(1); } }
 /* Full-width input fields */
-input[type=text], input[type=password] {
+.modal-input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -598,7 +602,7 @@ button:hover {
   background-color: #e5018c; }
 
 #map {
-  height: 100vh;
+  height: 78vh;
   width: 100%; }
 
 body {
