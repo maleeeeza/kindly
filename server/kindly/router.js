@@ -28,6 +28,7 @@ router.get('/kindlys', (req, res) => {
     });
 });
 
+//GET kindly by ID
 router.get('/kindlys/:id',passport.authenticate('jwt', { session: false }), (req, res) => {
   Kindly
     .find({creator: req.params.id})
@@ -43,7 +44,7 @@ router.get('/kindlys/:id',passport.authenticate('jwt', { session: false }), (req
     });
 });
 
-// Create a new kindly
+// POST a new kindly
 router.post("/kindlys", passport.authenticate('jwt', { session: false }), (req, res) => {
   const requiredFields = ['lat', 'long', 'kindly'];
   for (let i=0; i<requiredFields.length; i++) {
@@ -73,5 +74,15 @@ router.post("/kindlys", passport.authenticate('jwt', { session: false }), (req, 
       res.status(500).json({message: 'Internal server error'});
     });
 });
+
+// DELETE kindly by ID
+router.delete('/kindlys/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Kindly
+    .findByIdAndRemove(req.params.id)
+    .exec()
+    .then(kindlys => res.status(204).end())
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
 
 module.exports = {router};
