@@ -8,16 +8,24 @@
   <title>Document</title>
 </head>
 <body>
+
+
+
   <nav class="navbar">
     <img src="images/kindly.svg" class="logo" alt="Kindly"/>
+
+    <div class="float-right">
+
+
+    <button id="login" onclick="document.getElementById('id01').style.display='block'" class="login-button">Login</button>
+    <button id="signup" onclick="document.getElementById('signup-modal').style.display='block'" class="login-button">SignUp</button>
     <button id="toggle-kindly-form" class="button-kindly-post " type="button" hidden>
       <img src="images/post-kindly.svg" class="post-kindly-icon" alt="Post a Kindly"/>
       Post a kindly
     </button>
-    <button id="login" onclick="document.getElementById('id01').style.display='block'" class="login-button">Login</button>
-    <button id="signup" onclick="document.getElementById('signup-modal').style.display='block'" class="login-button">SignUp</button>
-    <button id="logout" class="logout-button" hidden>Logout</button>
-    <button id="my-kindlys" onclick="document.getElementById('my-kindlys-modal').style.display='block'" class="my-kindlys-button" hidden>My Kindlys</button>
+    <button id="my-kindlys" onclick="document.getElementById('my-kindlys-modal').style.display='block'" class="login-button" hidden>My Kindlys</button>
+    <button id="logout" class="login-button" hidden>Logout</button>
+    </div>
   </nav>
 
 
@@ -39,7 +47,7 @@
       <label><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" class="modal-input" required>
 
-      <button type="submit" class="login-button">Login</button>
+      <button type="submit" class="log-me-in">Login</button>
 
     </div>
 

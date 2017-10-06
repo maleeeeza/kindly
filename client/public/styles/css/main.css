@@ -398,6 +398,10 @@ template {
   background-color: #ffffff;
   padding: 20px; }
 
+.float-right {
+  display: inline-block;
+  float: right; }
+
 header {
   height: auto;
   width: 100%;
@@ -558,16 +562,16 @@ button:focus {
 .button-kindly-post {
   color: #39bced;
   font: 700 150% viato, sans-serif;
-  float: right;
   background: #ffffff;
   vertical-align: middle;
   border: none;
-  padding: 0; }
+  padding: 0;
+  margin-right: 10px; }
   @media only screen and (max-width: 700px) {
     .button-kindly-post {
       font-size: 0; } }
 
-.form-button, .login-button, .cancel-button {
+.form-button, .login-button, .cancel-button, .my-account-button, .log-me-in {
   height: auto;
   font-family: Helvetica, sans-serif;
   font-weight: bold;
@@ -577,22 +581,29 @@ button:focus {
   color: #ffffff;
   border-radius: 10px; }
   @media only screen and (max-width: 700px) {
-    .form-button, .login-button, .cancel-button {
+    .form-button, .login-button, .cancel-button, .my-account-button, .log-me-in {
       font-size: 80%; } }
 
-.form-button {
+.form-button, .log-me-in {
   width: 200px;
   background-color: #39bced;
   margin-bottom: 10px; }
   @media only screen and (max-width: 700px) {
-    .form-button {
+    .form-button, .log-me-in {
       font-size: 80%;
       width: 100%; } }
 
 .login-button {
-  width: 100px;
-  float: right;
-  background-color: #39bced; }
+  width: auto;
+  background-color: #ffffff;
+  color: #39bced;
+  text-decoration: underline;
+  margin-right: 10px;
+  padding: 10px; }
+  @media only screen and (max-width: 700px) {
+    .login-button {
+      padding: 8px;
+      width: auto; } }
 
 .submit-kindly {
   width: 100%;

@@ -558,6 +558,6 @@ $('#my-kindlys').on('click', function(e){
 $('#logout').on('click', function(e){
   document.cookie = 'authToken' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   window.location.replace("/");
-})
+});
 
 });

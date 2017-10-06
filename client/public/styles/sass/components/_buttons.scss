@@ -16,18 +16,18 @@ button:focus {
 .button-kindly-post {
   color: $secondary-color;
   font: $header-font;
-  float: right;
   background: $quaternary-color;
   vertical-align: middle;
   border: none;
   padding: 0;
+  margin-right: 10px;
 
   @media only screen and #{$break-small} {
       font-size: 0;
   }
 }
 
-.form-button, .login-button, .cancel-button {
+.form-button, .login-button, .cancel-button, .my-account-button, .log-me-in {
   height: auto;
   font-family: $font-stack;
   font-weight: bold;
@@ -42,7 +42,7 @@ button:focus {
   }
 }
 
-.form-button {
+.form-button, .log-me-in {
   width: 200px;
   background-color: $secondary-color;
   margin-bottom:10px;
@@ -53,9 +53,16 @@ button:focus {
 }
 
 .login-button {
-  width: 100px;
-  float: right;
-  background-color: $secondary-color;
+  width: auto;
+  background-color: $quaternary-color;
+  color: $secondary-color;
+  text-decoration: underline;
+  margin-right: 10px;
+  padding: 10px;
+  @media only screen and #{$break-small} {
+      padding: 8px;
+      width: auto;
+  }
 }
 
 .submit-kindly {
