@@ -4,6 +4,9 @@ const chaiHttp = require('chai-http');
 const {app, runServer, closeServer} = require('../server');
 
 const should = chai.should();
+const chaiJWT = require('chai-jwt');
+
+chai.use(chaiJWT);
 
 chai.use(chaiHttp);
 
@@ -29,7 +32,7 @@ describe('Kindlys', function() {
       });
   });
 
-  it('should list all kindlys on GET', function() {
+  it('should GET all kindlys', function() {
 
     return chai.request(app)
       .get('/api/kindlys')
@@ -40,36 +43,37 @@ describe('Kindlys', function() {
         res.body.kindlys.should.be.a('array');
         const expectedKeys = ['_id', '__v', 'lat', 'long', 'kindly', 'creator', 'createdDate'];
         res.body.kindlys.forEach(function(kindly) {
-          kindly.should.be.a('object');
-          kindly.should.include.keys(expectedKeys);
+        kindly.should.be.a('object');
+        kindly.should.include.keys(expectedKeys);
         });
       });
   });
 
 
-  it('should list one kindly on GET by ID', function() {
+  it('should GET all kindlys by user ID', function() {
 
     return chai.request(app)
-      id = res.body.kindlys[0]._id
 
-      .get(`/api/kindlys/${id}`)
-      .then(function(res) {
-        res.should.have.status(200);
-        res.should.be.json;
-        res.body.should.have.property('kindlys').with.length.at.least(1);
-        res.body.kindlys.should.be.a('array');
-        const expectedKeys = ['_id', '__v', 'lat', 'long', 'kindly', 'creator', 'createdDate'];
-        res.body.kindlys.forEach(function(kindly) {
-          kindly.should.be.a('object');
-          kindly.should.include.keys(expectedKeys);
-        });
-      });
-  });
+    .post('/api/auth/login')
+    .auth('test9', 'test12345678')
+    .then(function(res){
+       return chai.request(app)
+          .get('/api/kindlys/59d5ad7f9823f22b589db8a6')
+          .set('Authorization', 'Bearer ' + res.body.authToken)
+           })
 
-  
+          .then(function(res) {
+            console.log(res.body);
+             res.should.have.status(200);
+             res.should.be.json;
+             res.body.should.have.property('kindlys').with.length.at.least(1);
+             res.body.kindlys.should.be.a('array');
+             const expectedKeys = ['_id', '__v', 'lat', 'long', 'kindly', 'creator', 'createdDate'];
+             res.body.kindlys.forEach(function(kindly) {
+               kindly.should.be.a('object');
+               kindly.should.include.keys(expectedKeys);
+             });
+           });
+       });
 
-
-
-
-
-  });
+});
