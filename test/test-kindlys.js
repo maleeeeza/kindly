@@ -39,7 +39,10 @@ describe('Kindlys', function() {
       .then(function(res) {
         res.should.have.status(200);
         res.should.be.json;
-        res.body.kindlys.should.have.length.at.least(1);
+        console.log(res.body);
+        console.log(res.body.kindlys);
+        res.body.kindlys.should.have.lengthOf.at.least(1);
+        console.log(res.body);
         res.body.kindlys.should.be.a('array');
         const expectedKeys = ['_id', '__v', 'lat', 'long', 'kindly', 'creator', 'createdDate'];
         res.body.kindlys.forEach(function(kindly) {
