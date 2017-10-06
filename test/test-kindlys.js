@@ -2,7 +2,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 
 const {app, runServer, closeServer} = require('../server');
-const {TEST_DATABASE_URL} = require('../server/config');
+// const {TEST_DATABASE_URL} = require('../server/config');
 
 const should = chai.should();
 const chaiJWT = require('chai-jwt');
