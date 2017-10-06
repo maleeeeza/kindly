@@ -11,19 +11,20 @@
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
-
-
+    @media only screen and #{$break-small} {
+      padding-top: 10px;
+    }
 }
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    background-color: $quaternary-color;
     margin: 5px auto; /* 15% from the top and centered */
-    border: 1px solid #888;
+    border: 1px solid $primary-color;
     width: 50%; /* Could be more or less, depending on screen size */
     @media only screen and #{$break-small} {
       width: 80%; /* Full width */
-      height: 80%; /* Full height */
+      height: auto;
     }
 }
 
@@ -38,12 +39,7 @@
     font-weight: bold;
 }
 
-/* Close button on hover */
-.close:hover,
-.close:focus {
-    color: red;
-    cursor: pointer;
-}
+
 
 /* Add Zoom Animation */
 .animate {
@@ -69,6 +65,7 @@
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    background-color: $quaternary-color;
 }
 
 /* Center the image and position the close button */
@@ -76,6 +73,13 @@
     text-align: center;
     margin: 24px 0 12px 0;
     position: relative;
+}
+
+.imgcontainer-logo {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+    height: 50px;
 }
 
 
@@ -86,4 +90,20 @@
 span.psw {
     float: right;
     padding-top: 16px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+
+  -webkit-text-fill-color: $primary-color;
+  -webkit-box-shadow: 0 0 0px 1000px $quaternary-color inset;
+  transition: background-color 5000s ease-in-out 0s;
 }

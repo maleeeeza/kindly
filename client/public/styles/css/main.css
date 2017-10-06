@@ -423,7 +423,7 @@ header p {
 
 form {
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
   margin-left: auto;
   margin-right: auto; }
 
@@ -461,6 +461,28 @@ textarea, input {
   margin-left: auto;
   margin-right: auto; }
 
+ul {
+  list-style-type: none;
+  padding: 0; }
+
+.createdDate-buttons-container {
+  margin-top: 20px; }
+
+.my-kindly-createdDate {
+  font-weight: bold;
+  padding: 10px 0; }
+
+.kindly-edit-field {
+  width: 100%;
+  height: 200px;
+  margin-top: 10px; }
+
+.my-kindly {
+  margin-bottom: 20px; }
+
+.js-item-index-element {
+  margin-top: 20px; }
+
 /* The Modal (background) */
 .modal {
   display: none;
@@ -480,21 +502,23 @@ textarea, input {
   background-color: rgba(0, 0, 0, 0.4);
   /* Black w/ opacity */
   padding-top: 60px; }
+  @media only screen and (max-width: 700px) {
+    .modal {
+      padding-top: 10px; } }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #ffffff;
   margin: 5px auto;
   /* 15% from the top and centered */
-  border: 1px solid #888;
+  border: 1px solid #666666;
   width: 50%;
   /* Could be more or less, depending on screen size */ }
   @media only screen and (max-width: 700px) {
     .modal-content {
       width: 80%;
       /* Full width */
-      height: 80%;
-      /* Full height */ } }
+      height: auto; } }
 
 /* The Close Button */
 .close {
@@ -505,12 +529,6 @@ textarea, input {
   color: #000;
   font-size: 35px;
   font-weight: bold; }
-
-/* Close button on hover */
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer; }
 
 /* Add Zoom Animation */
 .animate {
@@ -534,7 +552,8 @@ textarea, input {
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  background-color: #ffffff; }
 
 /* Center the image and position the close button */
 .imgcontainer {
@@ -542,12 +561,32 @@ textarea, input {
   margin: 24px 0 12px 0;
   position: relative; }
 
+.imgcontainer-logo {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+  height: 50px; }
+
 .container {
   padding: 16px; }
 
 span.psw {
   float: right;
   padding-top: 16px; }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #666666;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+  transition: background-color 5000s ease-in-out 0s; }
 
 button {
   cursor: pointer; }
@@ -571,7 +610,7 @@ button:focus {
     .button-kindly-post {
       font-size: 0; } }
 
-.form-button, .login-button, .cancel-button, .my-account-button, .log-me-in {
+.form-button, .login-button, .cancel-button, .my-account-button, .log-me-in, .delete-my-kindly, .edit-my-kindly, .cancel-kindly-edit, .submit-edited-kindly-button {
   height: auto;
   font-family: Helvetica, sans-serif;
   font-weight: bold;
@@ -581,19 +620,19 @@ button:focus {
   color: #ffffff;
   border-radius: 10px; }
   @media only screen and (max-width: 700px) {
-    .form-button, .login-button, .cancel-button, .my-account-button, .log-me-in {
+    .form-button, .login-button, .cancel-button, .my-account-button, .log-me-in, .delete-my-kindly, .edit-my-kindly, .cancel-kindly-edit, .submit-edited-kindly-button {
       font-size: 80%; } }
 
-.form-button, .log-me-in {
-  width: 200px;
+.form-button, .log-me-in, .cancel-kindly-edit {
+  width: 100%;
   background-color: #39bced;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  margin-top: 20px; }
   @media only screen and (max-width: 700px) {
-    .form-button, .log-me-in {
-      font-size: 80%;
-      width: 100%; } }
+    .form-button, .log-me-in, .cancel-kindly-edit {
+      font-size: 80%; } }
 
-.login-button {
+.login-button, .delete-my-kindly, .edit-my-kindly {
   width: auto;
   background-color: #ffffff;
   color: #39bced;
@@ -601,7 +640,7 @@ button:focus {
   margin-right: 10px;
   padding: 10px; }
   @media only screen and (max-width: 700px) {
-    .login-button {
+    .login-button, .delete-my-kindly, .edit-my-kindly {
       padding: 8px;
       width: auto; } }
 
@@ -626,12 +665,31 @@ button:hover {
 /* Extra styles for the cancel button */
 .cancelbtn {
   width: auto;
-  background-color: #e5018c; }
+  background-color: #ffffff;
+  font-size: 150%;
+  color: #666666;
+  border: none;
+  float: right;
+  margin-bottom: 20px; }
 
 .kindly-post-button-group {
   width: 100%;
   margin-left: auto;
   margin-right: auto; }
+
+.submit-edited-kindly-button {
+  width: 50%;
+  background: #e5018c;
+  float: right;
+  margin: 0; }
+
+.cancel-kindly-edit {
+  width: 35%;
+  float: left;
+  margin: 0; }
+
+.edit-button-group {
+  margin-bottom: 30px; }
 
 #map {
   height: 78vh;

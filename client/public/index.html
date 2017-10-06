@@ -32,12 +32,16 @@
 
 <!-- The Login Modal -->
 <div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none' class="close" title="Close Modal">&times;</span>
 
   <!-- Modal Content -->
   <form id="form" class="modal-content animate" action="#">
+    <div class="container">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">x</button>
+    </div>
     <div class="imgcontainer">
-      <img src="images/kindly.svg" class="logo" alt="Kindly"/>
+      <header>
+        <p>Login</p>
+      </header>
     </div>
 
     <div class="container">
@@ -50,22 +54,22 @@
       <button type="submit" class="log-me-in">Login</button>
 
     </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-
-    </div>
   </form>
 </div>
 
 <!-- The SignUp Modal -->
 <div id="signup-modal" class="modal">
-  <span onclick="document.getElementById('signup-modal').style.display='none' class="close" title="Close Modal">&times;</span>
+
 
   <!-- Modal Content -->
   <form id="signup-form" class="modal-content animate" action="#">
+    <div class="container">
+      <button type="button" onclick="document.getElementById('signup-modal').style.display='none'" class="cancelbtn">x</button>
+    </div>
     <div class="imgcontainer">
-      <img src="images/kindly.svg" class="logo" alt="Kindly"/>
+      <header>
+        <p>Sign Up</p>
+      </header>
     </div>
 
     <div class="container">
@@ -81,12 +85,8 @@
       <label><b>Last Name</b></label>
       <input type="text" placeholder="Enter Last Name" name="lastName" class="modal-input">
 
-      <button type="submit" class="login-button">SignUp!</button>
+      <button type="submit" class="log-me-in">SignUp!</button>
 
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('signup-modal').style.display='none'" class="cancelbtn">Cancel</button>
     </div>
   </form>
 </div>
@@ -94,12 +94,15 @@
 <!-- The My Kindlys Modal -->
 <div id="my-kindlys-modal" class="modal">
 
-  <span onclick="document.getElementById('my-kindlys-modal').style.display='none' class="close" title="Close Modal">&times;</span>
-
   <!-- Modal Content -->
   <div id="my-kindlys-content" class="modal-content animate">
+    <div class="container">
+      <button type="button" onclick="document.getElementById('my-kindlys-modal').style.display='none'" class="cancelbtn">x</button>
+    </div>
     <div class="imgcontainer">
-      <img src="images/kindly.svg" class="logo" alt="Kindly"/>
+      <header>
+        <p>My Kindlys</p>
+      </header>
     </div>
 
     <div class="container">
@@ -108,9 +111,6 @@
 
       </ul>
 
-    </div>
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('my-kindlys-modal').style.display='none'" class="cancelbtn">Cancel</button>
     </div>
   </div>
 </div>

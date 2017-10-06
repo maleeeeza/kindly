@@ -27,7 +27,7 @@ button:focus {
   }
 }
 
-.form-button, .login-button, .cancel-button, .my-account-button, .log-me-in {
+.form-button, .login-button, .cancel-button, .my-account-button, .log-me-in, .delete-my-kindly, .edit-my-kindly, .cancel-kindly-edit, .submit-edited-kindly-button {
   height: auto;
   font-family: $font-stack;
   font-weight: bold;
@@ -42,17 +42,17 @@ button:focus {
   }
 }
 
-.form-button, .log-me-in {
-  width: 200px;
+.form-button, .log-me-in, .cancel-kindly-edit {
+  width: 100%;
   background-color: $secondary-color;
   margin-bottom:10px;
+  margin-top: 20px;
   @media only screen and #{$break-small} {
       font-size: 80%;
-      width: 100%;
   }
 }
 
-.login-button {
+.login-button, .delete-my-kindly, .edit-my-kindly {
   width: auto;
   background-color: $quaternary-color;
   color: $secondary-color;
@@ -90,11 +90,34 @@ button:hover {
 /* Extra styles for the cancel button */
 .cancelbtn {
     width: auto;
-    background-color: $tertiary-color;
+    background-color: $quaternary-color;
+    font-size: 150%;
+    color: $primary-color;
+    border: none;
+    float: right;
+    margin-bottom: 20px;
+
 }
 
 .kindly-post-button-group{
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.submit-edited-kindly-button {
+  width: 50%;
+  background: $tertiary-color;
+  float: right;
+  margin:0;
+}
+
+.cancel-kindly-edit {
+  width: 35%;
+  float:left;
+  margin:0;
+}
+
+.edit-button-group {
+  margin-bottom: 30px;
 }

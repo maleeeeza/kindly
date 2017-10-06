@@ -352,7 +352,6 @@ function getUserId(){
     var userObject = JSON.parse(atob(tokens[1]));
     userId = userObject.user.id;
     state.creator = userId;
-
 }
 
 function updateKindly(kindlyId){
@@ -404,15 +403,20 @@ function generateMyKindlysString(kindlys) {
 function generateMyKindlyElement(kindly, kindlyIndex){
   let myKindlyHTML = (
     `
-      <span class="my-kindly-createdDate">${kindly.createdDate}</span>
-      <span class="my-kindly">${kindly.kindly}</span>
-      <button type="button" id="delete-button-${kindly.id}" class="delete-my-kindly" data-id="${kindly.id}">Delete</button>
-      <button type="button" id="edit-button-${kindly.id}" class="edit-my-kindly" data-id="${kindly.id}" onclick="editKindly('${kindly.id}')">Edit</button>
+      <div class="createdDate-buttons-container">
+        <span class="my-kindly-createdDate">${kindly.createdDate.substring(0,10)}</span>
+          <button type="button" id="edit-button-${kindly.id}" class="edit-my-kindly" data-id="${kindly.id}" onclick="editKindly('${kindly.id}')">Edit</button>
+          <button type="button" id="delete-button-${kindly.id}" class="delete-my-kindly" data-id="${kindly.id}">Delete</button> <br/>
+      </div>
+        <span class="my-kindly">${kindly.kindly}</span> <br />
+
       <form id="form-${kindly.id}" class="kindly-edit-form" hidden>
         <div>
           <textarea id="kindlyedit-${kindly.id}" name="kindlyedit" placeholder="Enter act of kindness" type="text" class="kindly-edit-field">${kindly.kindly}</textarea>
-          <button id="cancel-${kindly.id}"type="button" class="cancel-kindly-edit" onclick="cancelEdit('${kindly.id}')">Cancel</button>
-          <button id="save-${kindly.id}"type="button" class="submit-edited-kindly-button" data-id="${kindly.id}" onclick="saveKindlyEdit('${kindly.id}')">Save</button>
+          <div class="edit-button-group">
+            <button id="cancel-${kindly.id}"type="button" class="cancel-kindly-edit" onclick="cancelEdit('${kindly.id}')">Cancel</button>
+            <button id="save-${kindly.id}"type="button" class="submit-edited-kindly-button" data-id="${kindly.id}" onclick="saveKindlyEdit('${kindly.id}')">Save</button>
+          </div>
         </div>
       </form>
     `
@@ -517,10 +521,9 @@ $(function(){
       formData[name] = value;
   });
   logMeIn(formData);
-  // $('#id01').css('display', "none");
-  window.location.replace("/");
-
-
+  setTimeout(function(){
+      window.location.replace("/");
+  }, 100);
 });
 
 // signup
