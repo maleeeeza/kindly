@@ -45,6 +45,11 @@ button:focus {
 .form-button {
   width: 200px;
   background-color: $secondary-color;
+  margin-bottom:10px;
+  @media only screen and #{$break-small} {
+      font-size: 80%;
+      width: 100%;
+  }
 }
 
 .login-button {
@@ -54,19 +59,20 @@ button:focus {
 }
 
 .submit-kindly {
-  width: 60vw;
+  width: 100%;
   color: $quaternary-color;
   font: $header-font;
   background: $tertiary-color;
   vertical-align: middle;
   padding: 10px;
-  margin:10px;
+  margin-top:10px;
   border-radius: 10px;
   border: none;
 
+
   @media only screen and #{$break-small} {
-      width:90vw;
-      font-size: 80%;
+      width:100%;
+      font-size: 90%;
   }
 }
 
@@ -78,4 +84,10 @@ button:hover {
 .cancelbtn {
     width: auto;
     background-color: $tertiary-color;
+}
+
+.kindly-post-button-group{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }

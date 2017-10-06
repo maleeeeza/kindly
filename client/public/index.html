@@ -109,24 +109,25 @@
 
 
 <!-- Kindly Post -->
-  <form id="kindly-form" class='hidden'>
-
-    <div>
-      <button type="button" id="current-location" class="form-button">Current location</button>
-
-        <strong>  OR  </strong>
-
-      <button type="button" id="address" class="form-button">Enter Address</button>
-
-    </div>
-    <div>
-      <input id="autocomplete" placeholder="Enter your address" type="text" class="address-field" hidden/> </input><br />
-      <textarea id="kindly" placeholder="Enter act of kindness" type="text" class="kindly-field" hidden/></textarea>
-      <button id="submit" type="button" class="submit-kindly" hidden>Post Kindly</button>
-    </div>
+<div class="post-kindly-container">
 
 
-  </form>
+      <form id="kindly-form" class='hidden'>
+
+        <div  class="kindly-post-button-group">
+          <button type="button" id="current-location" class="form-button">Current location</button>
+          <button type="button" id="address" class="form-button">Enter Address</button>
+
+        </div>
+        <div class="form-group">
+          <input id="autocomplete" placeholder="Enter your address" type="text" class="address-field" hidden/> </input><br />
+          <textarea id="kindly" placeholder="Enter act of kindness" type="text" class="kindly-field" hidden/></textarea>
+          <button id="submit" type="button" class="submit-kindly" hidden>Post Kindly</button>
+        </div>
+
+
+      </form>
+  </div>
 
   <main>
     <header>

@@ -11,28 +11,42 @@ form {
 
 .address-field {
   height: 50px;
-  width: 60vw;
-  margin: 10px;
-  padding: 10px;
+  width: 100%;
+  padding-left: 10px;
+  margin-top:10px;
 
-  @media only screen and #{$break-small} {
-      width:90vw;
-  }
 }
 
 .kindly-field {
   height: 200px;
-  width: 60vw;
-  margin: 10px;
-  padding: 10px;
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 0;
+  padding-right: 0;
+  margin-top:10px;
 
-  @media only screen and #{$break-small} {
-      width:90vw;
-  }
+
 }
 
 textarea, input {
   outline:0;
   border-radius: 10px;
   border: 1px solid $primary-color;
+}
+
+.post-kindly-container {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  @media only screen and #{$break-small} {
+      width:90%;
+      font-size: 80%;
+  }
+}
+
+.form-group{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }

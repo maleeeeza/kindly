@@ -425,26 +425,37 @@ form {
 
 .address-field {
   height: 50px;
-  width: 60vw;
-  margin: 10px;
-  padding: 10px; }
-  @media only screen and (max-width: 700px) {
-    .address-field {
-      width: 90vw; } }
+  width: 100%;
+  padding-left: 10px;
+  margin-top: 10px; }
 
 .kindly-field {
   height: 200px;
-  width: 60vw;
-  margin: 10px;
-  padding: 10px; }
-  @media only screen and (max-width: 700px) {
-    .kindly-field {
-      width: 90vw; } }
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 0;
+  padding-right: 0;
+  margin-top: 10px; }
 
 textarea, input {
   outline: 0;
   border-radius: 10px;
   border: 1px solid #666666; }
+
+.post-kindly-container {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto; }
+  @media only screen and (max-width: 700px) {
+    .post-kindly-container {
+      width: 90%;
+      font-size: 80%; } }
+
+.form-group {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
 
 /* The Modal (background) */
 .modal {
@@ -571,7 +582,12 @@ button:focus {
 
 .form-button {
   width: 200px;
-  background-color: #39bced; }
+  background-color: #39bced;
+  margin-bottom: 10px; }
+  @media only screen and (max-width: 700px) {
+    .form-button {
+      font-size: 80%;
+      width: 100%; } }
 
 .login-button {
   width: 100px;
@@ -579,19 +595,19 @@ button:focus {
   background-color: #39bced; }
 
 .submit-kindly {
-  width: 60vw;
+  width: 100%;
   color: #ffffff;
   font: 700 150% viato, sans-serif;
   background: #e5018c;
   vertical-align: middle;
   padding: 10px;
-  margin: 10px;
+  margin-top: 10px;
   border-radius: 10px;
   border: none; }
   @media only screen and (max-width: 700px) {
     .submit-kindly {
-      width: 90vw;
-      font-size: 80%; } }
+      width: 100%;
+      font-size: 90%; } }
 
 button:hover {
   opacity: 0.8; }
@@ -600,6 +616,11 @@ button:hover {
 .cancelbtn {
   width: auto;
   background-color: #e5018c; }
+
+.kindly-post-button-group {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
 
 #map {
   height: 78vh;
