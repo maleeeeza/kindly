@@ -75,6 +75,34 @@ router.post("/kindlys", passport.authenticate('jwt', { session: false }), (req, 
     });
 });
 
+//Update by ID
+router.put('/kindlys/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    const message = (
+      `Request path id (${req.params.id}) and request body id ` +
+      `(${req.body.id}) must match`);
+    console.error(message);
+    res.status(400).json({message: message});
+  }
+
+
+  const toUpdate = {};
+  const updateableFields = ['kindly'];
+
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
+    }
+  });
+
+  Kindly
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+    .exec()
+    .then(kindly => res.status(204).end())
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
+
 // DELETE kindly by ID
 router.delete('/kindlys/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
   Kindly
