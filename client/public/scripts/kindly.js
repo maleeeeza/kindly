@@ -4,6 +4,7 @@ var placeSearch, autocomplete;
 
 
 var state = {
+  id: null,
   lat: null,
   long: null,
   kindly: null,
@@ -267,6 +268,9 @@ function getKindlysById(){
     success: function(msg){
       let kindlys = msg.kindlys;
       // console.log(msg);
+      userKindlys = {
+        kindlys: []
+      };
       for (var i = 0; i < kindlys.length; i++){
         userKindlys.kindlys.push({createdDate: kindlys[i].createdDate, kindly: kindlys[i].kindly, id: kindlys[i]._id});
       }
@@ -351,7 +355,23 @@ function getUserId(){
 
 }
 
-
+function updateKindly(kindlyId){
+  $.ajax({
+    type:"PUT",
+    dataType:'json',
+    data: JSON.stringify(state),
+    beforeSend: function(req){
+      isLoggedIn();
+      const authCookie = Cookies.get('authToken');
+        req.setRequestHeader('Authorization', 'Bearer ' + authCookie);
+    },
+    contentType: 'application/json',
+    url: "/api/kindlys/" + kindlyId,
+    success: function(msg){
+      console.log(msg);
+    }
+  });
+}
 
 function deleteMyKindly(kindlyId){
   $.ajax({
@@ -386,7 +406,15 @@ function generateMyKindlyElement(kindly, kindlyIndex){
     `
       <span class="my-kindly-createdDate">${kindly.createdDate}</span>
       <span class="my-kindly">${kindly.kindly}</span>
-      <button type="button" id="delete-button" class="delete-my-kindly" data-id="${kindly.id}">Delete</button>
+      <button type="button" id="delete-button-${kindly.id}" class="delete-my-kindly" data-id="${kindly.id}">Delete</button>
+      <button type="button" id="edit-button-${kindly.id}" class="edit-my-kindly" data-id="${kindly.id}" onclick="editKindly('${kindly.id}')">Edit</button>
+      <form id="form-${kindly.id}" class="kindly-edit-form" hidden>
+        <div>
+          <textarea id="kindlyedit-${kindly.id}" name="kindlyedit" placeholder="Enter act of kindness" type="text" class="kindly-edit-field">${kindly.kindly}</textarea>
+          <button id="cancel-${kindly.id}"type="button" class="cancel-kindly-edit" onclick="cancelEdit('${kindly.id}')">Cancel</button>
+          <button id="save-${kindly.id}"type="button" class="submit-edited-kindly-button" data-id="${kindly.id}" onclick="saveKindlyEdit('${kindly.id}')">Save</button>
+        </div>
+      </form>
     `
   );
 
@@ -397,19 +425,48 @@ function generateMyKindlyElement(kindly, kindlyIndex){
   );
 }
 
+function editKindly(id) {
+  $(`#form-${id}`).removeAttr('hidden');
+};
+
+function cancelEdit(id){
+  $(`#form-${id}`).attr('hidden', true);
+}
+
+function saveKindlyEdit(id){
+  //Update Kindly and refresh list
+    state.kindly = $(`#kindlyedit-${id}`).val();
+    // state.id = $(this).attr('data-id');
+    state.id = id;
+    console.log(JSON.stringify(state));
+    console.log(id);
+    updateKindly(state.id);
+    getKindlysById();
+    setTimeout(function(){
+        renderMyKindlyList();
+    }, 1000);
+
+
+
+}
+
+
+
 function renderMyKindlyList() {
   console.log('`rendermyKindlyList` ran');
   let { kindlys } = userKindlys;
   const myKindlyListString = generateMyKindlysString(kindlys);
 
-  // insert that HTML into the DOM
+  // insert kindly list into the DOM
   $('#my-kindlys-list').html(myKindlyListString);
 
+  //Delete kindly from DB and remove li from DOM
   $('.delete-my-kindly').on('click', function(e){
     deleteMyKindly($(this).attr('data-id'));
     var li = $(this).closest('li')
     li.fadeOut('slow', function() { li.remove(); });
   });
+
 }
 
 
@@ -495,19 +552,6 @@ $('#my-kindlys').on('click', function(e){
   }, 1000);
 
 });
-
-
-$('#delete-button').on('click', function(e){
-  console.log("test");
-  deleteMyKindly($(this).attr('data-id'));
-})
-
-// //delete my kindly
-// $('#delete-my-kindly').on('click', function(e){
-//   // var idFromButton = $(this).attr('data-id');
-//   console.log("hi");
-// });
-// handleKindlyDelete();
 
 
 //logout
