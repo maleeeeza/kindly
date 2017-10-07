@@ -65,7 +65,7 @@ router.post("/kindlys", passport.authenticate('jwt', { session: false }), (req, 
     .then(
       kindly => {
         User.findOneAndUpdate({_id: req.body.creator}, {$push: {kindlys: kindly._id}}).exec().then(function(){
-          res.status(201).json({message: 'Kindly Created'});
+          res.status(201).json({message: 'Kindly Created', id: kindly._id});
         });
 
       })
