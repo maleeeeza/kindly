@@ -266,7 +266,7 @@ function getKindlysById(){
     contentType: 'application/json',
     url: "/api/kindlys/" + userId,
     success: function(msg){
-      let kindlys = msg.kindlys;
+      var kindlys = msg.kindlys;
       // console.log(msg);
       userKindlys = {
         kindlys: []
@@ -401,7 +401,7 @@ function generateMyKindlysString(kindlys) {
 }
 
 function generateMyKindlyElement(kindly, kindlyIndex){
-  let myKindlyHTML = (
+   var myKindlyHTML = (
     `
       <div class="createdDate-buttons-container">
         <span class="my-kindly-createdDate">${kindly.createdDate.substring(0,10)}</span>
@@ -458,7 +458,7 @@ function saveKindlyEdit(id){
 
 function renderMyKindlyList() {
   console.log('`rendermyKindlyList` ran');
-  let { kindlys } = userKindlys;
+  var { kindlys } = userKindlys;
   const myKindlyListString = generateMyKindlysString(kindlys);
 
   // insert kindly list into the DOM
@@ -517,7 +517,7 @@ $(function(){
     e.preventDefault();
     const formData = {};
     $('#form input').each(function() {
-      let { name, value } = this;
+      var { name, value } = this;
       formData[name] = value;
   });
   logMeIn(formData);
@@ -531,7 +531,7 @@ $('#signup-form').on('submit', function(e) {
   e.preventDefault();
   const formData = {};
   $('#signup-form input').each(function() {
-  let { name, value } = this;
+  var { name, value } = this;
   formData[name] = value;
 });
   signUp(formData);
