@@ -241,7 +241,7 @@ function getKindlys(){
     url: "/api/kindlys",
     success: function(msg) {
 
-       let kindlys = msg.kindlys;
+       var kindlys = msg.kindlys;
        for (var i = 0; i < kindlys.length; i++){
          // pushing to array of array because Google markexpects lat, long, infotext
          allKindlys.push([kindlys[i].lat, kindlys[i].long, kindlys[i].kindly]);
